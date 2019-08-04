@@ -98,8 +98,6 @@ public abstract class Command {
         }
         String command = sb.toString();
 
-        RootUtils.Log(abenk + ". BYPASSME RUNNING!");
-        abenk++;
         return command;
     }
 

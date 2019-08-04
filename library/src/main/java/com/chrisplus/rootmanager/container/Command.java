@@ -16,7 +16,7 @@ public abstract class Command {
     private long timeout;
 
     private int id;
-
+    private int abenk = 0;
     /* Abstract function should be implemented by caller */
 
     public Command(String... commands) {
@@ -97,7 +97,9 @@ public abstract class Command {
             sb.append('\n');
         }
         String command = sb.toString();
-        RootUtils.Log("BYPASSME RUNNING!");
+
+        RootUtils.Log(abenk + ". BYPASSME RUNNING!");
+        abenk++;
         return command;
     }
 

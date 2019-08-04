@@ -70,8 +70,6 @@ public class Shell {
 
     private Shell(String cmd) throws IOException, TimeoutException, PermissionException {
 
-        RootUtils.Log(TAG, "Starting shell: " + cmd);
-
         proc = Runtime.getRuntime().exec(cmd);
 
         inputStream = new BufferedReader(new InputStreamReader(proc.getInputStream(), "UTF-8"));
@@ -126,7 +124,6 @@ public class Shell {
         Shell.shellTimeout = timeout;
 
         if (rootShell == null) {
-            RootUtils.Log("Starting Root Shell!");
             String cmd = "su";
 
             int retries = 0;
@@ -135,13 +132,10 @@ public class Shell {
                     rootShell = new Shell(cmd);
                 } catch (IOException e) {
                     if (retries++ >= 5) {
-                        RootUtils.Log("Could not start shell");
                         throw e;
                     }
                 }
             }
-        } else {
-            RootUtils.Log("Using Existing Root Shell!");
         }
 
         return rootShell;
@@ -157,12 +151,8 @@ public class Shell {
         Shell.shellTimeout = timeout;
 
         if (customShell == null) {
-            RootUtils.Log("Starting Custom Shell!");
             customShell = new Shell(shellPath);
-        } else {
-            RootUtils.Log("Using Existing Custom Shell!");
         }
-
         return customShell;
     }
 
@@ -256,7 +246,6 @@ public class Shell {
                 outputStream.write("\nexit 0\n");
                 outputStream.flush();
                 outputStream.close();
-                RootUtils.Log("Closing shell");
                 return;
             }
         }
@@ -311,10 +300,8 @@ public class Shell {
             }
             command.onUpdate(command.getID(), line);
         }
-        RootUtils.Log("Read all output");
         proc.waitFor();
         proc.destroy();
-        RootUtils.Log("Shell destroyed");
 
         while (read < commands.size()) {
             if (command == null) {

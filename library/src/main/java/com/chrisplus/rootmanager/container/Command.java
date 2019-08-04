@@ -48,12 +48,10 @@ public abstract class Command {
 
     public void terminate(String reason) {
         try {
-            RootUtils.Log("Terminate all shells with reason " + reason);
             Shell.closeAll();
             setExitCode(-1);
         } catch (IOException e) {
             e.printStackTrace();
-            RootUtils.Log("Terminate all shells and io exception happens");
         }
     }
 
@@ -63,7 +61,6 @@ public abstract class Command {
                 this.wait(timeout);
                 if (!isFinished) {
                     isFinished = true;
-                    RootUtils.Log("Timeout Exception has occurred.");
                     terminate("Timeout Exception");
                 }
             }

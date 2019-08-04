@@ -57,7 +57,6 @@ public class RootUtils {
      */
     public static int generateCommandID() {
         cmdID = cmdID + 1;
-        RootUtils.Log("Return a command id " + cmdID);
         return cmdID;
     }
 

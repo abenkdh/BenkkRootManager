@@ -26,7 +26,6 @@ public class Result {
     }
 
     public Boolean getResult() {
-        RootUtils.Log("Status Code is " + statusCode);
         if (statusCode == 0) {
             return true;
         } else if (statusCode <= 100) {
